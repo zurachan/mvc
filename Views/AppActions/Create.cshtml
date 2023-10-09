@@ -1,0 +1,44 @@
+﻿@model mvc.Domains.AppAction
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>AppAction</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="ActionName" class="control-label"></label>
+                <input asp-for="ActionName" class="form-control" />
+                <span asp-validation-for="ActionName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ActionPath" class="control-label"></label>
+                <input asp-for="ActionPath" class="form-control" />
+                <span asp-validation-for="ActionPath" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ControllerId" class="control-label"></label>
+                <select asp-for="ControllerId" class="form-control" asp-items="ViewBag.ControllerId"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
