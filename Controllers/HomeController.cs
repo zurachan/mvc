@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using mvc.Common;
 using mvc.Domains;
@@ -60,6 +61,8 @@ namespace mvc.Controllers
                         new Claim(ClaimTypes.Name, model.Username),
                         new Claim(ClaimTypes.NameIdentifier, Guid.NewGuid().ToString())
                     };
+
+                    var roles = _context.UserRoles.Where(x => x.UserId == taikhoan.UserId).ToList();
 
                     var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
                     var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256Signature);

@@ -75,6 +75,13 @@ namespace mvc.Controllers
                 };
                 _context.Add(account);
 
+                var userRole = new UserRole
+                {
+                    User = user,
+                    RoleId = model.RoleId,
+                };
+                _context.Add(userRole);
+
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
