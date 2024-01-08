@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using mvc.Common;
 using mvc.Domains;
@@ -42,25 +43,25 @@ namespace mvc.Controllers
 
         [AllowAnonymous]
         [HttpPost]
-        public IActionResult DoLogin(string tenDangNhap, string matKhau)
+        public IActionResult Login([Bind("Username,Password")] LoginModel model)
         {
-            if (string.IsNullOrEmpty(tenDangNhap) || string.IsNullOrEmpty(matKhau))
+            if (string.IsNullOrEmpty(model.Username) || string.IsNullOrEmpty(model.Password))
                 return RedirectToAction("Error");
             IActionResult response = Unauthorized();
-            //var taikhoan = _taikhoanService.GetByUsername(tenDangNhap);
 
-            var taikhoan = _context.Accounts.FirstOrDefault(x => x.Username == tenDangNhap);
+            var taikhoan = _context.Accounts.FirstOrDefault(x => x.Username == model.Username);
 
             if (taikhoan != null)
             {
-                var password = Utils.EncryptedPassword(matKhau, taikhoan.PasswordSalt);
+                var password = Utils.EncryptedPassword(model.Password, taikhoan.PasswordSalt);
                 if (taikhoan.PasswordHash == password)
                 {
                     var claims = new[] {
-                        new Claim(ClaimTypes.Name, tenDangNhap),
-                        //new Claim(ClaimTypes.Role, tenQuyen),
+                        new Claim(ClaimTypes.Name, model.Username),
                         new Claim(ClaimTypes.NameIdentifier, Guid.NewGuid().ToString())
                     };
+
+                    var roles = _context.UserRoles.Where(x => x.UserId == taikhoan.UserId).ToList();
 
                     var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
                     var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256Signature);
@@ -93,10 +94,6 @@ namespace mvc.Controllers
             return RedirectToAction("Login");
         }
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
