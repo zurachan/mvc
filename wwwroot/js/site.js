@@ -2,3 +2,15 @@
 // for details on configuring this project to bundle and minify static web assets.
 
 // Write your JavaScript code.
+
+(function () {
+    var app = angular.module('app', []);
+    app.controller('index', index);
+    function index() {
+        var vm = this;
+        vm.Index = 'MVC';
+
+
+
+    }
+})();
