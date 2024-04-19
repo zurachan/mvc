@@ -27,6 +27,7 @@ namespace mvc.Controllers
 
         public IActionResult Index()
         {
+            var defaultVal = 0;
             return View();
         }
 
