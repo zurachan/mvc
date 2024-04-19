@@ -27,72 +27,66 @@ namespace mvc.Controllers
 
         public IActionResult Index()
         {
-            string token = HttpContext.Session.GetString("Token");
-
-            if (token == null)
-            {
-                return (RedirectToAction("Login"));
-            }
             return View();
         }
 
-        public IActionResult Login()
-        {
-            return View();
-        }
+        //public IActionResult Login()
+        //{
+        //    return View();
+        //}
 
-        [AllowAnonymous]
-        [HttpPost]
-        public IActionResult Login([Bind("Username,Password")] LoginModel model)
-        {
-            if (string.IsNullOrEmpty(model.Username) || string.IsNullOrEmpty(model.Password))
-                return RedirectToAction("Error");
-            IActionResult response = Unauthorized();
+        //[AllowAnonymous]
+        //[HttpPost]
+        //public IActionResult Login([Bind("Username,Password")] LoginModel model)
+        //{
+        //    if (string.IsNullOrEmpty(model.Username) || string.IsNullOrEmpty(model.Password))
+        //        return RedirectToAction("Error");
+        //    IActionResult response = Unauthorized();
 
-            var taikhoan = _context.Accounts.FirstOrDefault(x => x.Username == model.Username);
+        //    var taikhoan = _context.Accounts.FirstOrDefault(x => x.Username == model.Username);
 
-            if (taikhoan != null)
-            {
-                var password = Utils.EncryptedPassword(model.Password, taikhoan.PasswordSalt);
-                if (taikhoan.PasswordHash == password)
-                {
-                    var claims = new[] {
-                        new Claim(ClaimTypes.Name, model.Username),
-                        new Claim(ClaimTypes.NameIdentifier, Guid.NewGuid().ToString())
-                    };
+        //    if (taikhoan != null)
+        //    {
+        //        var password = Utils.EncryptedPassword(model.Password, taikhoan.PasswordSalt);
+        //        if (taikhoan.PasswordHash == password)
+        //        {
+        //            var claims = new[] {
+        //                new Claim(ClaimTypes.Name, model.Username),
+        //                new Claim(ClaimTypes.NameIdentifier, Guid.NewGuid().ToString())
+        //            };
 
-                    var roles = _context.UserRoles.Where(x => x.UserId == taikhoan.UserId).ToList();
+        //            var roles = _context.UserRoles.Where(x => x.UserId == taikhoan.UserId).ToList();
 
-                    var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
-                    var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256Signature);
-                    var expiry = DateTime.Now.AddMinutes(Convert.ToInt32(_config["Jwt:ExpiryInMinutes"]));
+        //            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
+        //            var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256Signature);
+        //            var expiry = DateTime.Now.AddMinutes(Convert.ToInt32(_config["Jwt:ExpiryInMinutes"]));
 
-                    var tokenDescriptor = new JwtSecurityToken(
-                        _config["Jwt:Issuer"],
-                        _config["Jwt:Audience"],
-                        claims,
-                        expires: expiry,
-                        signingCredentials: credentials
-                        );
+        //            var tokenDescriptor = new JwtSecurityToken(
+        //                _config["Jwt:Issuer"],
+        //                _config["Jwt:Audience"],
+        //                claims,
+        //                expires: expiry,
+        //                signingCredentials: credentials
+        //                );
 
-                    var generatedToken = new JwtSecurityTokenHandler().WriteToken(tokenDescriptor);
-                    if (generatedToken != null)
-                    {
-                        HttpContext.Session.SetString("Token", generatedToken);
-                        return RedirectToAction("Index");
-                    }
-                    else return RedirectToAction("Login");
-                }
-                else return RedirectToAction("Login");
-            }
-            else return RedirectToAction("Login");
-        }
+        //            var generatedToken = new JwtSecurityTokenHandler().WriteToken(tokenDescriptor);
+        //            if (generatedToken != null)
+        //            {
+        //                HttpContext.Session.SetString("Token", generatedToken);
+        //                return RedirectToAction("Index");
+        //            }
+        //            else return RedirectToAction("Login");
+        //        }
+        //        else return RedirectToAction("Login");
+        //    }
+        //    else return RedirectToAction("Login");
+        //}
 
-        public IActionResult Logout()
-        {
-            HttpContext.Session.Clear();
-            return RedirectToAction("Login");
-        }
+        //public IActionResult Logout()
+        //{
+        //    HttpContext.Session.Clear();
+        //    return RedirectToAction("Login");
+        //}
 
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

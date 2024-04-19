@@ -3,62 +3,30 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"]</title>
+    <title>MVC - AngularJS</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/mvc.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/style.css" />
 </head>
 <body>
-    <header ng-controller="index as vm">
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Trang chủ</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="Index">Nhân sự</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="TaiChinh" asp-action="Index">Tài chính</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="AppRoles" asp-action="Index">Role</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="AppControllers" asp-action="Index">Controller</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="PhanQuyen" asp-action="Index">Phân quyền</a>
-                        </li>
-                    </ul>
-                </div>
-
-                <a class="btn btn-sm btn-light btn-outline-dark" asp-area="" asp-controller="Home" asp-action="Logout">Log out</a>
-            </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2023 - mvc - <a asp-area="" asp-controller="Home" asp-action="Index">Trang chủ</a>
-        </div>
-    </footer>
+    @{
+        RenderBody();
+    }
+    <app-root></app-root>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/angular-js/angular.js"></script>
-    <script src="~/lib/angular-js/angular-route.js"></script>
-    <script src="~/js/lodash.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)
+    <script src="~/lib/jquery-block-ui/jquery-blockUI.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <script src="~/lib/angular-js/angular.min.js"></script>
+    <script src="~/lib/angular-js/angular-animate.min.js"></script>
+    <script src="~/lib/angular-js/angular-ui-router.min.js"></script>
+    <script src="~/lib/ui-bootstrap/ui-bootstrap-tpls-2.5.0.min.js"></script>
+    <script src="~/lib/ocLazyLoad/ocLazyLoad.min.js"></script>
+    <script src="~/lib/lodash/lodash.js"></script>
+    <script src="~/js/index.js"></script>
+    <script src="~/js/config.js"></script>
+    <script src="~/Src/App.js"></script>
+    <script src="~/Src/Components/Header/Header.js"></script>
+    <script src="~/Src/Components/Footer/Footer.js"></script>
 </body>
 </html>
