@@ -17,11 +17,10 @@ namespace mvc.Controllers
         }
 
         // GET: Users
-        public async Task<IActionResult> Index()
+        public async Task<JsonResult> GetUser()
         {
-            return _context.Users.Include(x => x.Account) != null ?
-            View(await _context.Users.Include(x => x.Account).ToListAsync()) :
-            Problem("Entity set 'AppDbContext.Users'  is null.");
+            var user = await _context.Users.ToListAsync();
+            return new JsonResult(user);
         }
 
         // GET: Users/Details/5
