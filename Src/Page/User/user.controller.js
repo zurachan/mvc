@@ -8,13 +8,11 @@
         OnInit()
 
         async function OnInit() {
-            debugger
             await getUser()
         }
 
         async function getUser() {
-            debugger
-            let res = await UserService.getList()
+            let res = await UserService.getList({  })
             debugger
         }
 
