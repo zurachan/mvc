@@ -112,7 +112,7 @@
         // override these in your code to change the default behavior and style
         $.blockUI.defaults = {
             // message displayed when blocking (use null for no message)
-            message: "<img src='assets/img/loading.gif' width='50px'>",
+            message: "<img src='../../loading.gif' width='50px'>",
 
             title: null,		// title string; only used when theme == true
             draggable: false,	// only used when theme == true (requires jquery-ui.js to be loaded)

@@ -7,8 +7,8 @@
         }
         return factory
 
-        function getList() {
-            return ApiService.get({}, '/Users/GetUser')
+        function getList(p) {
+            return ApiService.post(p, '/Users/GetUser')
         }
 
         function getById(id) {
