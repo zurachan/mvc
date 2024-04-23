@@ -41,7 +41,11 @@
     }])
     angular.module('app').factory('CommonService', ['$uibModal', function ($uibModal) {
         var factory = {
-            createModal: createModal
+            createModal: createModal,
+            setLocalStorage: setLocalStorage,
+            getLocalStorage: getLocalStorage,
+            removeLocalStorage: removeLocalStorage,
+            clearLocalStorage: clearLocalStorage
         }
         return factory
 
@@ -61,6 +65,21 @@
             })
 
             return instance
+        }
+
+        function setLocalStorage(key, value) {
+            localStorage.setItem(key, JSON.stringify(value))
+        }
+        function getLocalStorage(key) {
+            let local = localStorage.getItem(key)
+            local = local ? JSON.parse(local) : local
+            return local
+        }
+        function removeLocalStorage(key) {
+            localStorage.removeItem(key)
+        }
+        function clearLocalStorage() {
+            localStorage.clear()
         }
     }])
 })()

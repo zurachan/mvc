@@ -4,9 +4,13 @@
         templateUrl: '/src/components/header/header.html',
         controller: Controller,
         controllerAs: 'vm',
+        bindings: {
+            logOut: '<',
+            user: '='
+        },
     })
 
-    function Controller($scope, $location, $transitions) {
+    function Controller($scope, $location, $transitions, CommonService, $state) {
         var vm = this
         vm.menu = [
             { name: 'User', path: 'user' },

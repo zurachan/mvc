@@ -1,25 +1,26 @@
 ﻿<div class="row">
-    <nav class="navbar navbar-default">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                        data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" ui-sref="home">HOME</a>
-            </div>
+            <a class="navbar-brand" ui-sref="home">HOME</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-between" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                    <a ng-repeat="item in vm.menu" ng-class="vm.Current == item.path ? 'nav-link active':'nav-link'"
+                       ui-sref="{{item.path}}">
+                        {{item.name}}
+                    </a>
+                </div>
 
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li ng-repeat="item in vm.menu" ng-class="vm.Current == item.path ? 'active':''">
-                        <a ui-sref="{{item.path}}" ui-sref-active="active">{{item.name}}</a>
-                    </li>
-                </ul>
+                <div class="d-flex align-items-center float-end">
+                    <span class="me-2">{{vm.user.fullName}}</span>
+                    <button type="button" class="btn btn-outline-dark" ng-click="vm.logOut()">
+                        Log Out
+                    </button>
+                </div>
+
             </div>
         </div>
     </nav>
 </div>
-

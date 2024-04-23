@@ -12,8 +12,7 @@
         }
 
         async function getUser() {
-            let res = await UserService.getList({  })
-            debugger
+            let res = await UserService.getList({})
         }
 
     }
