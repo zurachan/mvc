@@ -1,0 +1,22 @@
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using mvc.Models.Authen;
+using mvc.Services;
+
+namespace mvc.Controllers
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    [Authorize]
+    public class AuthenController(IAuthenService service) : ControllerBase
+    {
+        [HttpPost]
+        [Route("Login")]
+        [AllowAnonymous]
+        public AuthenResponse Login(AuthenRequest model) => service.Login(model);
+
+        [HttpPost]
+        [Route("Test")]
+        public string Test() => "Test done!";
+    }
+}

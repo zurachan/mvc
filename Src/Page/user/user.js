@@ -8,12 +8,7 @@
         OnInit()
 
         async function OnInit() {
-            await getUser()
-        }
 
-        async function getUser() {
-            let res = await UserService.getList({})
         }
-
     }
 })()

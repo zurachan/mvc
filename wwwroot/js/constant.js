@@ -25,34 +25,55 @@
         ]
 
         config.TEMPLATE_URL = [
-            //{
-            //    key: 'login',
-            //    url: '/login',
-            //    templateUrl: '/src/page/login/login.html',
-            //    controller: 'login as vm',
-            //    lazyLoadFiles: [
-            //        "/src/page/login/login.js",
-            //    ]
-            //},
             {
-                key: 'user',
-                url: '/user',
+                key: 'Users',
+                url: '/Users',
                 templateUrl: '/src/page/user/user.html',
                 controller: 'user as vm',
                 lazyLoadFiles: [
+                    "/src/page/user/user.js",
                     "/src/page/user/user.service.js",
-                    "/src/page/user/user.controller.js",
                     "/src/components/pagination/pagination.js"
                 ]
             },
             {
-                key: 'department',
-                url: '/department',
-                templateUrl: '/src/page/department/department.html',
-                controller: 'department as vm',
+                key: 'TaiChinh',
+                url: '/TaiChinh',
+                templateUrl: '/src/page/taichinh/taichinh.html',
+                controller: 'taichinh as vm',
                 lazyLoadFiles: [
-                    "/src/page/department/department.service.js",
-                    "/src/page/department/department.controller.js",
+                    "/src/page/taichinh/taichinh.js",
+                    "/src/page/taichinh/taichinh.service.js",
+                ]
+            },
+            {
+                key: 'PhanQuyen',
+                url: '/PhanQuyen',
+                templateUrl: '/src/page/phanquyen/phanquyen.html',
+                controller: 'phanquyen as vm',
+                lazyLoadFiles: [
+                    "/src/page/phanquyen/phanquyen.js",
+                    "/src/page/phanquyen/phanquyen.service.js",
+                ]
+            },
+            {
+                key: 'AppControllers',
+                url: '/AppControllers',
+                templateUrl: '/src/page/controller/controller.html',
+                controller: 'controller as vm',
+                lazyLoadFiles: [
+                    "/src/page/controller/controller.js",
+                    "/src/page/controller/controller.service.js",
+                ]
+            },
+            {
+                key: 'AppRoles',
+                url: '/AppRoles',
+                templateUrl: '/src/page/role/role.html',
+                controller: 'role as vm',
+                lazyLoadFiles: [
+                    "/src/page/role/role.js",
+                    "/src/page/role/role.service.js",
                 ]
             },
         ]

@@ -6,16 +6,14 @@
         controllerAs: 'vm',
         bindings: {
             logOut: '<',
-            user: '='
+            user: '=',
+            menu: '=',
+            test: '<'
         },
     })
 
-    function Controller($scope, $location, $transitions, CommonService, $state) {
+    function Controller($location, $transitions) {
         var vm = this
-        vm.menu = [
-            { name: 'User', path: 'user' },
-            { name: 'Department', path: 'department' },
-        ]
         vm.Current;
 
         OnInit()

@@ -12,7 +12,7 @@
             return $http({
                 method: 'GET',
                 url: url,
-                params: p
+                data: p
             }).then((response) => {
                 if (response.status != 200)
                     console.log(response)
@@ -27,7 +27,7 @@
             return $http({
                 method: 'POST',
                 url: url,
-                params: p
+                data: p
             }).then((response) => {
                 if (response.status != 200)
                     console.log(response)
@@ -39,6 +39,7 @@
         }
         function put(p, url) { }
     }])
+
     angular.module('app').factory('CommonService', ['$uibModal', function ($uibModal) {
         var factory = {
             createModal: createModal,

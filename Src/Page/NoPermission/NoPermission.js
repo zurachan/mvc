@@ -1,7 +1,7 @@
 (function () {
     'use strict'
-    angular.module('app').controller('nopermission', nopermission)
-    function nopermission() {
+    angular.module('app').controller('nopermission', controller)
+    function controller() {
         var vm = this
     }
 })()

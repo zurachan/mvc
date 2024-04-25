@@ -6,14 +6,27 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse justify-content-between" id="navbarNavAltMarkup">
-                <div class="navbar-nav">
-                    <a ng-repeat="item in vm.menu" ng-class="vm.Current == item.path ? 'nav-link active':'nav-link'"
-                       ui-sref="{{item.path}}">
-                        {{item.name}}
-                    </a>
-                </div>
+                <ul class="navbar-nav">
+                    <li class="nav-item" ng-repeat="item in vm.menu">
+                        <a ng-class="vm.Current == item.controllerPath ? 'nav-link active':'nav-link'"
+                           ui-sref="{{item.controllerPath}}">
+                            {{item.controllerName}}
+                        </a>
+                    </li>
+                    <!--<li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Dropdown link
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Action</a></li>
+                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        </ul>
+                    </li>-->
+                </ul>
 
                 <div class="d-flex align-items-center float-end">
+                    <!--<button class="btn btn-info me-2" type="button" ng-click="vm.test()">Test authen</button>-->
                     <span class="me-2">{{vm.user.fullName}}</span>
                     <button type="button" class="btn btn-outline-dark" ng-click="vm.logOut()">
                         Log Out

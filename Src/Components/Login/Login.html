@@ -3,7 +3,7 @@
         <div class="col-md-5">
             <form id="form-login" name="form" ng-submit="vm.logIn(vm.Login)" novalidate>
                 <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Email address</label>
+                    <!--<label for="exampleInputEmail1" class="form-label">Email address</label>
                     <input name="email" class="form-control" id="exampleInputEmail1" autocomplete="off"
                            placeholder="Enter email" ng-model="vm.Login.Email" required
                            ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/">
@@ -14,8 +14,16 @@
                         <span ng-show="form.email.$error.pattern">
                             Wrong format email
                         </span>
-                    </div>
+                    </div>-->
 
+                    <label for="exampleInputUsername" class="form-label">Username</label>
+                    <input type="text" name="username" class="form-control" id="exampleInputUsername"
+                           placeholder="Enter username" ng-model="vm.Login.Username" required>
+                    <div class="form-text text-danger" ng-show="form.username.$touched && form.username.$invalid">
+                        <span ng-show="form.username.$error.required">
+                            Username Required
+                        </span>
+                    </div>
 
                 </div>
                 <div class="mb-3">

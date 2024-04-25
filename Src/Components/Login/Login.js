@@ -11,7 +11,7 @@
     function Controller() {
         var vm = this
         vm.Login = {
-            Email: "",
+            Username: "",
             Password: ""
         }
     }

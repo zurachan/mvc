@@ -1,0 +1,38 @@
+﻿<div class="container">
+    <h5>{{vm.page}}</h5>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <td class="col-1 fw-bold">#</td>
+                <td class="col-auto fw-bold">Tên hiển thị</td>
+                <td class="col-auto fw-bold">Đường dẫn</td>
+                <td class="col-2">
+                    <button type="button" class="btn btn-sm btn-primary" ng-click="vm.onAddEdit()">
+                        <i class="bi bi-plus-lg"></i>
+                        Thêm
+                    </button>
+                </td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="item in vm.Datasource">
+                <td>{{item.stt}}</td>
+                <td>{{item.controllerName}}</td>
+                <td>{{item.controllerPath}}</td>
+                <td>
+                    <button type="button" class="btn btn-sm btn-success" title="Sửa"
+                            ng-click="vm.onAddEdit(item)">
+                        <i class="bi bi-pencil-square"></i>
+                    </button>
+                    <button type="button" class="btn btn-sm btn-danger" title="Xoá"
+                            ng-click="vm.onDelete(item)">
+                        <i class="bi bi-x-lg"></i>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div id="controllerModal"></div>
+</div>
+
+
