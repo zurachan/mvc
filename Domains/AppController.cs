@@ -12,12 +12,12 @@ namespace mvc.Domains
         public int Id { get; set; }
         [Required]
         [Column("controller_name")]
-        public string ControllerName { get; set; }
+        public required string ControllerName { get; set; }
         [Required]
         [Column("controller_path")]
-        public string ControllerPath { get; set; }
+        public required string ControllerPath { get; set; }
 
-        public virtual List<RoleController> RoleControllers { get; set; }
-        public virtual List<AppAction> Actions { get; set; }
+        public virtual List<RoleController>? RoleControllers { get; set; }
+        public virtual List<AppAction>? Actions { get; set; }
     }
 }

@@ -17,6 +17,12 @@ namespace mvc.Controllers
 
         [HttpPost]
         [Route("Test")]
-        public string Test() => "Test done!";
+        public string Test()
+        {
+            var user = HttpContext.User;
+            var name = user.Claims.FirstOrDefault()?.Value;
+
+            return "Test done! with user: " + name;
+        }
     }
 }

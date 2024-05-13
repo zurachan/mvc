@@ -11,10 +11,11 @@ namespace mvc.Controllers
     public class MenuController(IMenuService service) : ControllerBase
     {
         [HttpPost]
-        [Route("controller")]
-        public List<AppController> GetMenu()
-        {
-            return service.GetMenu();
-        }
+        [Route("getmenu")]
+        public List<AppController> GetMenu() => service.GetMenu();
+
+        [HttpPost]
+        [Route("savemenu")]
+        public AppController SaveMenu(AppController model) => service.SaveMenu(model);
     }
 }

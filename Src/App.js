@@ -6,26 +6,29 @@
         controllerAs: 'vm',
     })
 
-    function Controller($scope, $state, $timeout, CommonService, AuthenService) {
+    function Controller($scope, $state, $location, CommonService, AuthenService) {
         var vm = this
 
         vm.IsAuthen = false
-        vm.User = [
-            { email: 'duong@gmail.com', password: '123456', fullName: 'Hoàng Thái Dương', role: 'Admin' },
-            { email: 'thao@gmail.com', password: '123456', fullName: 'Trần Phương Thảo', role: 'Hr' }
-        ]
         vm.CurrentUser = {}
         vm.Menu = []
 
         OnInit()
+
         async function OnInit() {
             $.blockUI()
             vm.CurrentUser = CommonService.getLocalStorage('credential')
             vm.Menu = CommonService.getLocalStorage('menu')
             if (vm.CurrentUser) {
                 vm.IsAuthen = true
-                $state.dispose()
-                $state.go('home')
+                let current = $location.path().replace('/', '')
+                if (current && vm.Menu.some(x => x.controllerPath == current)) {
+                    $state.dispose()
+                    $state.go(current)
+                } else {
+                    $state.dispose()
+                    $state.go('home')
+                }
             }
             else {
                 vm.IsAuthen = false
@@ -56,10 +59,20 @@
         }
 
         vm.TestAuthen = async () => {
-            let res = await AuthenService.testAuthen()
-            if (res.status == 200)
-                alert(res.data)
-            else alert("fail")
+            //let res = await AuthenService.testAuthen()
+            //if (res.status == 200)
+            //    alert(res.data)
+            //else alert("fail")
+            //$('#liveToast').toast({
+            //    delay: 2000
+            //}).show()
+
+            const toastBootstrap = bootstrap.Toast.getOrCreateInstance($('#liveToast'), {
+                delay: 2000,
+                autohide: true,
+                animation: true
+            })
+            toastBootstrap.show()
         }
 
         async function doLogin(model) {

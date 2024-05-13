@@ -5,37 +5,35 @@
         var vm = this
         vm.page = 'Danh sách menu'
         vm.Datasource = []
-
+        vm.Detail
         OnInit()
 
         vm.onAddEdit = (item) => {
-            let parentElem = angular.element('#controllerModal')
-            let modalInstance = CommonService.createModal(
-                true,
-                '/src/page/controller/controllerModal.html',
-                'controllerModal as vm',
-                'lg',
-                parentElem,
-                ['/src/page/controller/controllerModal.js'],
-                item
-            )
-
-            modalInstance.result.then((response) => {
-                console.log(response)
-            }).catch((response) => {
-                console.log(response)
-                console.log('Modal dismissed at: ' + new Date())
-            })
-            _.defer(() => { $scope.$apply() })
+            if (item) {
+                vm.Detail = { ...item }
+            } else {
+                vm.Detail = {
+                    id: 0,
+                    controllerName: '',
+                    controllerPath: '',
+                }
+            }
+            $('#controllerModal').modal('show')
         }
 
+        vm.onSave = async () => {
+            $.blockUI()
+            await save(vm.Detail)
+            await getMenu()
+            $('#controllerModal').modal('hide')
+            $.unblockUI()
+        }
 
         async function OnInit() {
             $.blockUI()
             await getMenu()
             $.unblockUI()
         }
-
         async function getMenu() {
             let res = await ControllerService.getMenu()
             if (res.status == 200)
@@ -48,5 +46,14 @@
             }
             _.defer(() => { $scope.$apply() })
         }
+        async function save(model) {
+            let res = await ControllerService.saveMenu(model)
+            if (res.status == 200) {
+
+            }
+        }
+        $("#controllerModal").on("hidden.bs.modal", function () {
+            vm.Detail
+        })
     }
 })()

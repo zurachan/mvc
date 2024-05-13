@@ -7,7 +7,10 @@
                 <td class="col-auto fw-bold">Tên hiển thị</td>
                 <td class="col-auto fw-bold">Đường dẫn</td>
                 <td class="col-2">
-                    <button type="button" class="btn btn-sm btn-primary" ng-click="vm.onAddEdit()">
+                    <button type="button"
+                            class="btn btn-sm btn-primary"
+                            title="Thêm mới"
+                            ng-click="vm.onAddEdit()">
                         <i class="bi bi-plus-lg"></i>
                         Thêm
                     </button>
@@ -20,11 +23,15 @@
                 <td>{{item.controllerName}}</td>
                 <td>{{item.controllerPath}}</td>
                 <td>
-                    <button type="button" class="btn btn-sm btn-success" title="Sửa"
+                    <button type="button"
+                            class="btn btn-sm btn-success"
+                            title="Cập nhật"
                             ng-click="vm.onAddEdit(item)">
                         <i class="bi bi-pencil-square"></i>
                     </button>
-                    <button type="button" class="btn btn-sm btn-danger" title="Xoá"
+                    <button type="button"
+                            class="btn btn-sm btn-danger"
+                            title="Xoá"
                             ng-click="vm.onDelete(item)">
                         <i class="bi bi-x-lg"></i>
                     </button>
@@ -32,7 +39,73 @@
             </tr>
         </tbody>
     </table>
-    <div id="controllerModal"></div>
+
+    <div div class="modal fade" id="controllerModal">
+        <div class="modal-dialog modal-lg">
+            <form id="form-controller" name="form" ng-submit="vm.onSave()" novalidate>
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5">
+                            <span ng-if="vm.Detail.id">Cập nhật Menu</span>
+                            <span ng-if="!vm.Detail.id">Thêm mới Menu</span>
+                        </h1>
+                        <button type="button"
+                                class="btn-close"
+                                data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-12 mb-3">
+                                <label class="form-label"
+                                       for="controllerName">Tên Menu</label>
+                                <input type="text"
+                                       class="form-control"
+                                       id="controllerName"
+                                       name="controllerName"
+                                       ng-model="vm.Detail.controllerName"
+                                       required />
+                                <div class="form-text text-danger"
+                                     ng-show="form.controllerName.$touched && form.controllerName.$invalid">
+                                    <span ng-show="form.controllerName.$error.required">
+                                        Tên Menu là trường bắt buộc
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label"
+                                       for="cotnrollerPath">Đường dẫn</label>
+                                <input type="text"
+                                       class="form-control"
+                                       id="controllerPath"
+                                       name="controllerPath"
+                                       ng-model="vm.Detail.controllerPath"
+                                       required />
+                                <div class="form-text text-danger"
+                                     ng-show="form.controllerPath.$touched && form.controllerPath.$invalid">
+                                    <span ng-show="form.controllerPath.$error.required">
+                                        Đường dẫn là trường bắt buộc
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button"
+                                class="btn btn-secondary"
+                                data-bs-dismiss="modal">
+                            Đóng
+                        </button>
+                        <button type="submit"
+                                class="btn btn-primary"
+                                ng-disabled="form.$invalid || form.$pristine ">
+                            Lưu
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
 
 
