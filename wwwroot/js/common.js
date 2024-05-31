@@ -50,9 +50,10 @@
         }
         return factory
 
-        function createModal(animation, templateUrl, controller, size, parentElem, lazyFiles, item) {
+        function createModal(templateUrl, controller, size, parentElem, lazyFiles, item) {
             let instance = $uibModal.open({
-                animation: animation,
+                animation: true,
+                backdrop: 'static',
                 templateUrl: templateUrl,
                 controller: controller,
                 size: size,

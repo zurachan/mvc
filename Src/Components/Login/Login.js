@@ -5,14 +5,24 @@
         controller: Controller,
         controllerAs: 'vm',
         bindings: {
-            logIn: '<'
+            signIn: '<',
+            signUp: '<'
         },
     })
     function Controller() {
         var vm = this
-        vm.Login = {
+        vm.IsSignIn = true
+        vm.SignIn = {
             Username: "",
             Password: ""
+        }
+        vm.SignUp = {
+            Fullname: '',
+            Username: '',
+            Password: ''
+        }
+        vm.ChangeStateSignIn = (state) => {
+            vm.IsSignIn = state
         }
     }
 })()

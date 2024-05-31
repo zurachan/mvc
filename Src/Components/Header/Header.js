@@ -5,7 +5,7 @@
         controller: Controller,
         controllerAs: 'vm',
         bindings: {
-            logOut: '<',
+            signOut: '<',
             user: '=',
             menu: '=',
             test: '<'

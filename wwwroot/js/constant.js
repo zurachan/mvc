@@ -37,16 +37,6 @@
                 ]
             },
             {
-                key: 'TaiChinh',
-                url: '/TaiChinh',
-                templateUrl: '/src/page/taichinh/taichinh.html',
-                controller: 'taichinh as vm',
-                lazyLoadFiles: [
-                    "/src/page/taichinh/taichinh.js",
-                    "/src/page/taichinh/taichinh.service.js",
-                ]
-            },
-            {
                 key: 'PhanQuyen',
                 url: '/PhanQuyen',
                 templateUrl: '/src/page/phanquyen/phanquyen.html',
@@ -57,13 +47,13 @@
                 ]
             },
             {
-                key: 'AppControllers',
-                url: '/AppControllers',
-                templateUrl: '/src/page/controller/controller.html',
-                controller: 'controller as vm',
+                key: 'menu',
+                url: '/menu',
+                templateUrl: '/src/page/menu/menu.html',
+                controller: 'menu as vm',
                 lazyLoadFiles: [
-                    "/src/page/controller/controller.js",
-                    "/src/page/controller/controller.service.js",
+                    "/src/page/menu/menu.js",
+                    "/src/page/menu/menu.service.js",
                 ]
             },
             {
@@ -74,6 +64,46 @@
                 lazyLoadFiles: [
                     "/src/page/role/role.js",
                     "/src/page/role/role.service.js",
+                ]
+            },
+            {
+                key: 'sale',
+                url: '/sale',
+                templateUrl: '/src/page/sale/sale.html',
+                controller: 'sale as vm',
+                lazyLoadFiles: [
+                    "/src/page/sale/sale.js",
+                    "/src/page/sale/sale.service.js",
+                ]
+            },
+            {
+                key: 'content',
+                url: '/content',
+                templateUrl: '/src/page/content/content.html',
+                controller: 'content as vm',
+                lazyLoadFiles: [
+                    "/src/page/content/content.js",
+                    "/src/page/content/content.service.js",
+                ]
+            },
+            {
+                key: 'hr',
+                url: '/hr',
+                templateUrl: '/src/page/hr/hr.html',
+                controller: 'hr as vm',
+                lazyLoadFiles: [
+                    "/src/page/hr/hr.js",
+                    "/src/page/hr/hr.service.js",
+                ]
+            },
+            {
+                key: 'system',
+                url: '/system',
+                templateUrl: '/src/page/system/system.html',
+                controller: 'system as vm',
+                lazyLoadFiles: [
+                    "/src/page/system/system.js",
+                    "/src/page/system/system.service.js",
                 ]
             },
         ]

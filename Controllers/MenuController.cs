@@ -12,10 +12,10 @@ namespace mvc.Controllers
     {
         [HttpPost]
         [Route("getmenu")]
-        public List<AppController> GetMenu() => service.GetMenu();
+        public List<Menu> GetMenu() => service.GetMenu();
 
         [HttpPost]
         [Route("savemenu")]
-        public AppController SaveMenu(AppController model) => service.SaveMenu(model);
+        public Menu SaveMenu(Menu model) => service.SaveMenu(model);
     }
 }

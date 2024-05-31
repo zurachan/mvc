@@ -18,7 +18,7 @@ namespace mvc.Domains
         [Column("roleId")]
         public int RoleId { get; set; }
 
-        public virtual User User { get; set; }
-        public virtual AppRole Role { get; set; }
+        public virtual User? User { get; set; }
+        public virtual Role? Role { get; set; }
     }
 }

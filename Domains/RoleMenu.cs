@@ -3,8 +3,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace mvc.Domains
 {
-    [Table("role_controller")]
-    public class RoleController
+    [Table("role_menu")]
+    public class RoleMenu
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -14,11 +14,11 @@ namespace mvc.Domains
         [Column("roleId")]
         public int RoleId { get; set; }
 
-        [ForeignKey("controller")]
-        [Column("controllerId")]
-        public int ControllerId { get; set; }
+        [ForeignKey("menu")]
+        [Column("menuId")]
+        public int MenuId { get; set; }
 
-        public virtual AppRole Role { get; set; }
-        public virtual AppController Controller { get; set; }
+        public virtual Role? Role { get; set; }
+        public virtual Menu? Menu { get; set; }
     }
 }

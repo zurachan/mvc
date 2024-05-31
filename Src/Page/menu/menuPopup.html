@@ -1,0 +1,56 @@
+﻿<form name="vm.form" ng-submit="vm.ok()" novalidate>
+    <div class="modal-header">
+        <h3 class="modal-title">
+            <span ng-if="vm.Detail.id">Cập nhật Menu</span>
+            <span ng-if="!vm.Detail.id">Thêm mới Menu</span>
+        </h3>
+    </div>
+    <div class="modal-body">
+        <div class="form-group">
+            <label class="form-label"
+                   for="name">Tên Menu</label>
+            <input type="text"
+                   class="form-control"
+                   id="name"
+                   name="name"
+                   ng-model="vm.Detail.name"
+                   required />
+            <div class="form-text text-danger"
+                 ng-show="vm.form.name.$touched && vm.form.name.$invalid">
+                <span ng-show="vm.form.name.$error.required">
+                    Tên Menu là trường bắt buộc
+                </span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-label"
+                   for="path">Đường dẫn</label>
+            <input type="text"
+                   class="form-control"
+                   id="path"
+                   name="path"
+                   ng-model="vm.Detail.path"
+                   required />
+            <div class="form-text text-danger"
+                 ng-show="vm.form.path.$touched && vm.form.path.$invalid">
+                <span ng-show="vm.form.path.$error.required">
+                    Đường dẫn là trường bắt buộc
+                </span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-label"
+                   for="parentId">Menu cha</label>
+            <select class="form-control"
+                    id="parentId"
+                    name="parentId"
+                    ng-model="vm.Detail.parentId"
+                    ng-options="item.id as item.name for item in vm.Menu">
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" type="submit" ng-disabled="vm.form.$invalid || vm.form.$pristine">OK</button>
+        <button class="btn btn-warning" type="button" ng-click="vm.cancel()">Cancel</button>
+    </div>
+</form>

@@ -1,6 +1,6 @@
 (function () {
     'use strict'
-    angular.module('app').factory('ControllerService', ['ApiService', function (ApiService) {
+    angular.module('app').factory('MenuService', ['ApiService', function (ApiService) {
         var factory = {
             getMenu: getMenu,
             saveMenu: saveMenu,

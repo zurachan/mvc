@@ -7,6 +7,6 @@ namespace mvc.Models.Authen
         public User? User { get; set; }
         public string? Token { get; set; }
         public string? Message { get; set; }
-        public List<AppController>? Menu { get; set; }
+        public List<Menu>? Menu { get; set; }
     }
 }

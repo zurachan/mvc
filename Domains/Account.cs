@@ -12,16 +12,17 @@ namespace mvc.Domains
         public int Id { get; set; }
         [Required]
         [Column("username")]
-        public string Username { get; set; }
+        public required string Username { get; set; }
         [Required]
         [Column("passwordhash")]
-        public string PasswordHash { get; set; }
+        public required string PasswordHash { get; set; }
         [Required]
         [Column("passwordsalt")]
-        public string PasswordSalt { get; set; }
+        public required string PasswordSalt { get; set; }
 
         [ForeignKey("user")]
+        [Column("userId")]
         public int UserId { get; set; }
-        public virtual User User { get; set; }
+        public virtual User? User { get; set; }
     }
 }

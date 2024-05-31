@@ -4,17 +4,17 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace mvc.Domains
 {
     [Table("role")]
-    public class AppRole
+    public class Role
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Column("id")]
         public int Id { get; set; }
         [Required]
-        [Column("role_name")]
-        public string RoleName { get; set; }
+        [Column("name")]
+        public required string Name { get; set; }
 
-        public virtual List<UserRole> UserRoles { get; set; }
-        public virtual List<RoleController> RoleControllers { get; set; }
+        public virtual List<UserRole>? UserRoles { get; set; }
+        public virtual List<RoleMenu>? RoleControllers { get; set; }
     }
 }

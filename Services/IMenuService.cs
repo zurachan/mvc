@@ -4,25 +4,25 @@ namespace mvc.Services
 {
     public interface IMenuService
     {
-        List<AppController> GetMenu();
-        AppController SaveMenu(AppController model);
+        List<Menu> GetMenu();
+        Menu SaveMenu(Menu model);
     }
 
     public class MenuService(AppDbContext context) : IMenuService
     {
-        public List<AppController> GetMenu() => [.. context.Controllers];
+        public List<Menu> GetMenu() => [.. context.Menu];
 
-        public AppController SaveMenu(AppController model)
+        public Menu SaveMenu(Menu model)
         {
-            if (model.Id == 0) context.Controllers.Add(model);
+            if (model.Id == 0) context.Menu.Add(model);
             else
             {
-                var domain = context.Controllers.FirstOrDefault(x => x.Id == model.Id);
+                var domain = context.Menu.FirstOrDefault(x => x.Id == model.Id);
                 if (domain != null)
                 {
-                    domain.ControllerName = model.ControllerName;
-                    domain.ControllerPath = model.ControllerPath;
-                    context.Controllers.Update(domain);
+                    domain.Name = model.Name;
+                    domain.Path = model.Path;
+                    context.Menu.Update(domain);
                 }
             }
             context.SaveChanges();

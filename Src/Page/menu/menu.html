@@ -1,0 +1,47 @@
+﻿<div class="container">
+    <h5>{{vm.page}}</h5>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <td class="col-1 fw-bold">#</td>
+                <td class="col-auto fw-bold">Tên hiển thị</td>
+                <td class="col-auto fw-bold">Đường dẫn</td>
+                <td class="col-auto fw-bold">Menu cha</td>
+                <td class="col-2">
+                    <button type="button"
+                            class="btn btn-sm btn-primary"
+                            title="Thêm mới"
+                            ng-click="vm.onAddEdit()">
+                        <i class="fa fa-plus-square" aria-hidden="true"></i>
+                        Thêm
+                    </button>
+                </td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="item in vm.Datasource">
+                <td>{{item.stt}}</td>
+                <td>{{item.name}}</td>
+                <td>{{item.path}}</td>
+                <td>{{item.parent.name}}</td>
+                <td>
+                    <button type="button"
+                            class="btn btn-sm btn-success"
+                            title="Cập nhật"
+                            ng-click="vm.onAddEdit(item)">
+                        <i class="fa fa-pencil-square" aria-hidden="true"></i>
+                    </button>
+                    <button type="button"
+                            class="btn btn-sm btn-danger"
+                            title="Xoá"
+                            ng-click="vm.onDelete(item)">
+                        <i class="fa fa-trash" aria-hidden="true"></i>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div id="menuModal"></div>
+</div>
+
+

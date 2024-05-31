@@ -12,12 +12,11 @@ namespace mvc.Domains
         public int Id { get; set; }
         [Required]
         [Column("full_name")]
-        public string FullName { get; set; }
-        [Required]
+        public required string FullName { get; set; }
         [Column("address")]
-        public string Address { get; set; }
+        public string? Address { get; set; }
 
-        public virtual Account Account { get; set; }
-        public virtual List<UserRole> UserRoles { get; set; }
+        public virtual Account? Account { get; set; }
+        public virtual List<UserRole>? UserRoles { get; set; }
     }
 }

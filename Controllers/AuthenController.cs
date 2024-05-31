@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using mvc.Models;
 using mvc.Models.Authen;
 using mvc.Services;
 
@@ -11,9 +12,14 @@ namespace mvc.Controllers
     public class AuthenController(IAuthenService service) : ControllerBase
     {
         [HttpPost]
-        [Route("Login")]
+        [Route("SignIn")]
         [AllowAnonymous]
-        public AuthenResponse Login(AuthenRequest model) => service.Login(model);
+        public AuthenResponse SignIn(SignInRequest model) => service.SignIn(model);
+
+        [HttpPost]
+        [Route("SignUp")]
+        [AllowAnonymous]
+        public ResultModel<bool> SignUp(SignUpRequest model) => service.SignUp(model);
 
         [HttpPost]
         [Route("Test")]

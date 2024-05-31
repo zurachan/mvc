@@ -5,7 +5,7 @@ namespace mvc.Common
 {
     public class Cryptopher
     {
-        public string AppKey { get; set; } = "EmployeeEvaluation!@#123";
+        public string AppKey { get; set; } = "duonghoangthai!@#123";
         public string AppKeySalt { get; set; } = "123456Aa@";
         private readonly string AppKeySaltDefault = "123456Aa@";
 

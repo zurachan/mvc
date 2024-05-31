@@ -19,6 +19,7 @@
             $.blockUI()
             vm.CurrentUser = CommonService.getLocalStorage('credential')
             vm.Menu = CommonService.getLocalStorage('menu')
+            console.log(vm.Menu)
             if (vm.CurrentUser) {
                 vm.IsAuthen = true
                 let current = $location.path().replace('/', '')
@@ -39,7 +40,7 @@
             $.unblockUI()
         }
 
-        vm.onLogOut = () => {
+        vm.onSignOut = () => {
             CommonService.removeLocalStorage('credential')
             CommonService.removeLocalStorage('token')
             vm.CurrentUser = {}
@@ -48,14 +49,20 @@
             $state.go('login')
         }
 
-        vm.onLogIn = async (model) => {
+        vm.onSignIn = async (model) => {
             $.blockUI()
-            await doLogin(model)
+            await doSignIn(model)
             if (vm.IsAuthen) {
                 $state.dispose()
                 $state.go('home')
             }
             $.unblockUI()
+        }
+
+        vm.onSignUp = async (model) => {
+            debugger
+            let res = await AuthenService.SignUp(model)
+            debugger
         }
 
         vm.TestAuthen = async () => {
@@ -67,16 +74,16 @@
             //    delay: 2000
             //}).show()
 
-            const toastBootstrap = bootstrap.Toast.getOrCreateInstance($('#liveToast'), {
-                delay: 2000,
-                autohide: true,
-                animation: true
-            })
-            toastBootstrap.show()
+            //const toastBootstrap = bootstrap.Toast.getOrCreateInstance($('#liveToast'), {
+            //    delay: 2000,
+            //    autohide: true,
+            //    animation: true
+            //})
+            //toastBootstrap.show()
         }
 
-        async function doLogin(model) {
-            let res = await AuthenService.login(model)
+        async function doSignIn(model) {
+            let res = await AuthenService.SignIn(model)
             if (res.status == 200) {
                 vm.CurrentUser = res.data.user
                 vm.Menu = res.data.menu
@@ -104,13 +111,18 @@
 
     angular.module('app').factory('AuthenService', ['ApiService', function (ApiService) {
         var factory = {
-            login: login,
+            SignIn: SignIn,
+            SignUp: SignUp,
             testAuthen: testAuthen
         }
         return factory
 
-        function login(p) {
-            return ApiService.post(p, '/api/Authen/Login')
+        function SignIn(p) {
+            return ApiService.post(p, '/api/Authen/SignIn')
+        }
+
+        function SignUp(p) {
+            return ApiService.post(p, '/api/Authen/SignUp')
         }
 
         function testAuthen() {
