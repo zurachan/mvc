@@ -8,7 +8,6 @@
             signOut: '<',
             user: '=',
             menu: '=',
-            test: '<'
         },
     })
 

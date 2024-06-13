@@ -19,7 +19,6 @@
             $.blockUI()
             vm.CurrentUser = CommonService.getLocalStorage('credential')
             vm.Menu = CommonService.getLocalStorage('menu')
-            console.log(vm.Menu)
             if (vm.CurrentUser) {
                 vm.IsAuthen = true
                 let current = $location.path().replace('/', '')
@@ -60,27 +59,25 @@
         }
 
         vm.onSignUp = async (model) => {
-            debugger
             let res = await AuthenService.SignUp(model)
-            debugger
         }
 
-        vm.TestAuthen = async () => {
-            //let res = await AuthenService.testAuthen()
-            //if (res.status == 200)
-            //    alert(res.data)
-            //else alert("fail")
-            //$('#liveToast').toast({
-            //    delay: 2000
-            //}).show()
+        //vm.TestAuthen = async () => {
+        //let res = await AuthenService.testAuthen()
+        //if (res.status == 200)
+        //    alert(res.data)
+        //else alert("fail")
+        //$('#liveToast').toast({
+        //    delay: 2000
+        //}).show()
 
-            //const toastBootstrap = bootstrap.Toast.getOrCreateInstance($('#liveToast'), {
-            //    delay: 2000,
-            //    autohide: true,
-            //    animation: true
-            //})
-            //toastBootstrap.show()
-        }
+        //const toastBootstrap = bootstrap.Toast.getOrCreateInstance($('#liveToast'), {
+        //    delay: 2000,
+        //    autohide: true,
+        //    animation: true
+        //})
+        //toastBootstrap.show()
+        //}
 
         async function doSignIn(model) {
             let res = await AuthenService.SignIn(model)

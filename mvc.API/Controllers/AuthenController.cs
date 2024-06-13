@@ -19,7 +19,7 @@ namespace mvc.Controllers
         [HttpPost]
         [Route("SignUp")]
         [AllowAnonymous]
-        public ResultModel<bool> SignUp(SignUpRequest model) => service.SignUp(model);
+        public Response<bool> SignUp(SignUpRequest model) => service.SignUp(model);
 
         [HttpPost]
         [Route("Test")]

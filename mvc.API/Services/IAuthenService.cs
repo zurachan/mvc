@@ -14,7 +14,7 @@ namespace mvc.Services
     {
         AuthenResponse SignIn(SignInRequest request);
 
-        ResultModel<bool> SignUp(SignUpRequest request);
+        Response<bool> SignUp(SignUpRequest request);
     }
 
     public class AuthenSerice(AppDbContext context, IConfiguration config) : IAuthenService
@@ -33,8 +33,7 @@ namespace mvc.Services
                             new Claim(ClaimTypes.NameIdentifier, Guid.NewGuid().ToString())
                         };
 
-                    var roles = context.UserRole.Include(x => x.Role)
-                        .Where(x => x.UserId == taikhoan.UserId).Select(x => x.Role).ToList();
+                    var roles = context.UserRole.Include(x => x.Role).Where(x => x.UserId == taikhoan.UserId).Select(x => x.Role).ToList();
 
                     var menu = context.RoleMenu.Include(x => x.Menu).ThenInclude(x => x.Children)
                         .Where(x => roles.Contains(x.Role)).Select(x => x.Menu).OrderBy(x => x.Id).ToList();
@@ -67,7 +66,7 @@ namespace mvc.Services
             return result;
         }
 
-        public ResultModel<bool> SignUp(SignUpRequest request)
+        public Response<bool> SignUp(SignUpRequest request)
         {
             var dbAccount = context.Account.FirstOrDefault(x => x.Username == request.Username);
             if (dbAccount == null)
@@ -85,9 +84,9 @@ namespace mvc.Services
                 };
                 context.Account.Add(account);
                 context.SaveChanges();
-                return new ResultModel<bool>(true);
+                return new Response<bool>(true);
             }
-            else return new ResultModel<bool>(ErrorType.DUPLICATED, "Tài khoản đã tồn tại");
+            else return new Response<bool>(false) { Success = false, Message = "Tài khoản đã tồn tại" };
         }
     }
 }

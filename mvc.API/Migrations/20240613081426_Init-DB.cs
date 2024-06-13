@@ -7,7 +7,7 @@
 namespace mvc.Migrations
 {
     /// <inheritdoc />
-    public partial class Initdb : Migration
+    public partial class InitDB : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

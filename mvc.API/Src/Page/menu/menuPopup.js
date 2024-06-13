@@ -10,7 +10,6 @@
         async function OnInit() {
             await getMenu()
             vm.Menu = vm.Menu.filter(x => { return !x.parentId && x.id !== vm.Detail.id })
-            console.log(vm.Detail)
         }
 
         vm.ok = () => {

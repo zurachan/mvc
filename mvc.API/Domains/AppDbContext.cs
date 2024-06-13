@@ -5,9 +5,12 @@ namespace mvc.Domains
 {
     public class AppDbContext : DbContext
     {
+        public AppDbContext()
+        {
+        }
+
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
-
         }
 
         //Khởi tạo dữ liệu mẫu

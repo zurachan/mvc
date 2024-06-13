@@ -1,4 +1,5 @@
 ﻿using mvc.Domains;
+using mvc.Repository;
 
 namespace mvc.Services
 {
@@ -10,7 +11,13 @@ namespace mvc.Services
 
     public class MenuService(AppDbContext context) : IMenuService
     {
-        public List<Menu> GetMenu() => [.. context.Menu];
+        public List<Menu> GetMenu()
+        {
+            //var listMenu = unitOfWork.MenuRepository.Get();
+
+
+            return [.. context.Menu];
+        }
 
         public Menu SaveMenu(Menu model)
         {
@@ -22,6 +29,8 @@ namespace mvc.Services
                 {
                     domain.Name = model.Name;
                     domain.Path = model.Path;
+                    domain.ParentId = model.ParentId;
+
                     context.Menu.Update(domain);
                 }
             }

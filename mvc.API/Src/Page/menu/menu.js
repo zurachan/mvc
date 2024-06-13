@@ -14,8 +14,6 @@
             } else {
                 vm.Detail = {
                     id: 0,
-                    name: '',
-                    path: '',
                 }
             }
             openModal(vm.Detail, 'lg')
@@ -31,12 +29,10 @@
                 ["/src/page/menu/menupopup.js"],
                 item)
 
-            modalInstance.result.then((response) => {
-                console.log(response)
-            }).catch((response) => {
-                console.log(response)
-                console.log('Modal dismissed at: ' + new Date())
-            })
+            modalInstance.result.then(async (response) => {
+                await save(response)
+                await getMenu()
+            }).catch((response) => { })
         }
 
         vm.onSave = async () => {
@@ -47,10 +43,15 @@
             $.unblockUI()
         }
 
+        vm.onDelete = async (item) => {
+            if (!item || item.id == 0) return
+
+
+        }
+
         async function OnInit() {
             $.blockUI()
             await getMenu()
-            console.log(vm.Datasource)
             $.unblockUI()
         }
         async function getMenu() {
@@ -66,6 +67,7 @@
             _.defer(() => { $scope.$apply() })
         }
         async function save(model) {
+            debugger
             let res = await MenuService.saveMenu(model)
             if (res.status == 200) {
 

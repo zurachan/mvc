@@ -12,8 +12,8 @@ using mvc.Domains;
 namespace mvc.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240520083656_Init-db")]
-    partial class Initdb
+    [Migration("20240613081426_Init-DB")]
+    partial class InitDB
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
