@@ -1,15 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using mvc.Domain.Base;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace mvc.API.Domains
+namespace mvc.Domain
 {
-    [Table("role_menu")]
-    public class RoleMenu
+    public class RoleMenu : AuditEntity<int>
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
-
         [ForeignKey("role")]
         [Column("roleId")]
         public int RoleId { get; set; }

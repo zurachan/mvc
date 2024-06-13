@@ -1,15 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using mvc.Domain.Base;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace mvc.API.Domains
+namespace mvc.Domain
 {
-    [Table("role")]
-    public class Role
+    public class Role : AuditEntity<int>
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Column("id")]
-        public int Id { get; set; }
         [Required]
         [Column("name")]
         public required string Name { get; set; }

@@ -1,6 +1,7 @@
-﻿using mvc.Domains;
+﻿using mvc.Domain;
+using mvc.Infrastructure;
 
-namespace mvc.Repository
+namespace mvc.API.Repository
 {
     public interface IMenuReposity : IRepository<Menu>
     {

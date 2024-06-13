@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using mvc.Domains;
+using mvc.Infrastructure;
 using System.Linq.Expressions;
 
-namespace mvc.Repository
+namespace mvc.API.Repository
 {
     public class GenericRepository<TEntity> where TEntity : class
     {
@@ -12,7 +12,7 @@ namespace mvc.Repository
         public GenericRepository(AppDbContext context)
         {
             this.context = context;
-            this.dbSet = context.Set<TEntity>();
+            dbSet = context.Set<TEntity>();
         }
 
         public virtual IEnumerable<TEntity> Get(

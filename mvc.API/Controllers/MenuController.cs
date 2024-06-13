@@ -1,23 +1,19 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using mvc.Domains;
-using mvc.Repository;
-using mvc.Services;
+using mvc.API.Services;
+using mvc.Domain;
 
-namespace mvc.Controllers
+namespace mvc.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     [Authorize]
     public class MenuController(IMenuService service) : ControllerBase
     {
-        private UnitOfWork unitOfWork = new UnitOfWork();
         [HttpPost]
         [Route("getmenu")]
         public List<Menu> GetMenu()
         {
-            var menu = unitOfWork.MenuRepository.Get();
-
             return service.GetMenu();
         }
 

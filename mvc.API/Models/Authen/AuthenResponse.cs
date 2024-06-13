@@ -1,6 +1,6 @@
-﻿using mvc.Domains;
+﻿using mvc.Domain;
 
-namespace mvc.Models.Authen
+namespace mvc.API.Models.Authen
 {
     public class AuthenResponse
     {

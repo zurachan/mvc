@@ -1,4 +1,4 @@
-﻿namespace mvc.Models.Authen
+﻿namespace mvc.API.Models.Authen
 {
     public class SignInRequest
     {

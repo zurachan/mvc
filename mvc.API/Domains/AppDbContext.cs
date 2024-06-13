@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using mvc.Common;
+using mvc.Infrastructure.Helpers;
 
-namespace mvc.Domains
+namespace mvc.API.Domains
 {
     public class AppDbContext : DbContext
     {

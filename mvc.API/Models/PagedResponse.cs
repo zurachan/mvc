@@ -1,4 +1,4 @@
-﻿namespace mvc.Models
+﻿namespace mvc.API.Models
 {
     public class PagedResponse<T> : Response<T>
     {

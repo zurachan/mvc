@@ -1,4 +1,4 @@
-﻿namespace mvc.Common
+﻿namespace mvc.Infrastructure.Helpers
 {
     public static class Utils
     {

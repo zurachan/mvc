@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using mvc.Models;
-using mvc.Models.Authen;
-using mvc.Services;
+using mvc.API.Models;
+using mvc.API.Models.Authen;
+using mvc.API.Services;
 
-namespace mvc.Controllers
+namespace mvc.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

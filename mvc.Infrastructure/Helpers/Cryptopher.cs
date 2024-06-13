@@ -1,7 +1,7 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
 
-namespace mvc.Common
+namespace mvc.Infrastructure.Helpers
 {
     public class Cryptopher
     {
@@ -48,7 +48,7 @@ namespace mvc.Common
         {
             try
             {
-                byte[] toEncryptArray = UTF8Encoding.UTF8.GetBytes(toEncrypt);
+                byte[] toEncryptArray = Encoding.UTF8.GetBytes(toEncrypt);
                 byte[] resultArray = Encrypt(toEncryptArray);
                 return ToHexString(Convert.ToBase64String(resultArray, 0, resultArray.Length));
             }
@@ -64,7 +64,7 @@ namespace mvc.Common
             {
                 byte[] toDecryptArray = Convert.FromBase64String(FromHexString(toDecrypt));
                 byte[] resultArray = Decrypt(toDecryptArray);
-                return UTF8Encoding.UTF8.GetString(resultArray);
+                return Encoding.UTF8.GetString(resultArray);
             }
             catch
             {
@@ -77,7 +77,7 @@ namespace mvc.Common
             var key = AppKey + GetSalt2();
 
             var hashmd5 = new MD5CryptoServiceProvider();
-            var keyArray = hashmd5.ComputeHash(UTF8Encoding.UTF8.GetBytes(key));
+            var keyArray = hashmd5.ComputeHash(Encoding.UTF8.GetBytes(key));
             hashmd5.Clear();
 
             provider.Key = keyArray;

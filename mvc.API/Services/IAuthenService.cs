@@ -1,14 +1,15 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using mvc.Common;
-using mvc.Domains;
-using mvc.Models;
-using mvc.Models.Authen;
+using mvc.API.Models;
+using mvc.API.Models.Authen;
+using mvc.Domain;
+using mvc.Infrastructure;
+using mvc.Infrastructure.Helpers;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
-namespace mvc.Services
+namespace mvc.API.Services
 {
     public interface IAuthenService
     {
@@ -71,12 +72,13 @@ namespace mvc.Services
             var dbAccount = context.Account.FirstOrDefault(x => x.Username == request.Username);
             if (dbAccount == null)
             {
-                var user = new User() { FullName = request.Fullname };
+                var user = new User() { Id = 0, FullName = request.Fullname };
                 context.User.Add(user);
 
                 var salt = Guid.NewGuid().ToString();
                 var account = new Account()
                 {
+                    Id = 0,
                     Username = request.Username,
                     PasswordHash = Utils.EncryptedPassword(request.Password, salt),
                     PasswordSalt = salt,

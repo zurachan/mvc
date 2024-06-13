@@ -1,18 +1,15 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using mvc.Domain.Base;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace mvc.API.Domains
+namespace mvc.Domain
 {
-    [Table("menu")]
-    public class Menu
+    public class Menu : AuditEntity<int>
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Column("id")]
-        public int Id { get; set; }
         [Required]
         [Column("name")]
         public required string Name { get; set; }
+
         [Required]
         [Column("path")]
         public required string Path { get; set; }

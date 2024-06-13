@@ -1,7 +1,7 @@
-﻿using mvc.Domains;
-using mvc.Models;
+﻿using mvc.API.Models;
+using mvc.Infrastructure;
 
-namespace mvc.Repository
+namespace mvc.API.Repository
 {
     public interface IRepository<T> where T : class
     {

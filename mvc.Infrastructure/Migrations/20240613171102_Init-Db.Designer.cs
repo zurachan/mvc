@@ -5,27 +5,27 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using mvc.Domains;
+using mvc.Infrastructure;
 
 #nullable disable
 
-namespace mvc.Migrations
+namespace mvc.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240613081426_Init-DB")]
-    partial class InitDB
+    [Migration("20240613171102_Init-Db")]
+    partial class InitDb
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.4")
+                .HasAnnotation("ProductVersion", "8.0.6")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("mvc.Domains.Account", b =>
+            modelBuilder.Entity("mvc.Domain.Account", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -33,6 +33,16 @@ namespace mvc.Migrations
                         .HasColumnName("id");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<string>("PasswordHash")
                         .IsRequired()
@@ -43,6 +53,12 @@ namespace mvc.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("passwordsalt");
+
+                    b.Property<string>("UpdatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("UpdatedDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("UserId")
                         .HasColumnType("int")
@@ -58,12 +74,15 @@ namespace mvc.Migrations
                     b.HasIndex("UserId")
                         .IsUnique();
 
-                    b.ToTable("account");
+                    b.ToTable("Account");
 
                     b.HasData(
                         new
                         {
                             Id = 1,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2024, 6, 14, 0, 11, 1, 54, DateTimeKind.Local).AddTicks(256),
+                            IsDeleted = false,
                             PasswordHash = "76EFBFBD2D5CEFBFBD375A7402EFBFBDD9AF2FEFBFBDEFBFBD43EFBFBDEFBFBDEFBFBDDBBB033FEFBFBD48EFBFBD2E40EFBFBD09EFBFBD06",
                             PasswordSalt = "00000000-0000-0000-0000-000000000000",
                             UserId = 1,
@@ -72,6 +91,9 @@ namespace mvc.Migrations
                         new
                         {
                             Id = 2,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2024, 6, 14, 0, 11, 1, 54, DateTimeKind.Local).AddTicks(358),
+                            IsDeleted = false,
                             PasswordHash = "76EFBFBD2D5CEFBFBD375A7402EFBFBDD9AF2FEFBFBDEFBFBD43EFBFBDEFBFBDEFBFBDDBBB033FEFBFBD48EFBFBD2E40EFBFBD09EFBFBD06",
                             PasswordSalt = "00000000-0000-0000-0000-000000000000",
                             UserId = 2,
@@ -80,6 +102,9 @@ namespace mvc.Migrations
                         new
                         {
                             Id = 3,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2024, 6, 14, 0, 11, 1, 54, DateTimeKind.Local).AddTicks(397),
+                            IsDeleted = false,
                             PasswordHash = "76EFBFBD2D5CEFBFBD375A7402EFBFBDD9AF2FEFBFBDEFBFBD43EFBFBDEFBFBDEFBFBDDBBB033FEFBFBD48EFBFBD2E40EFBFBD09EFBFBD06",
                             PasswordSalt = "00000000-0000-0000-0000-000000000000",
                             UserId = 3,
@@ -88,6 +113,9 @@ namespace mvc.Migrations
                         new
                         {
                             Id = 4,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2024, 6, 14, 0, 11, 1, 54, DateTimeKind.Local).AddTicks(437),
+                            IsDeleted = false,
                             PasswordHash = "76EFBFBD2D5CEFBFBD375A7402EFBFBDD9AF2FEFBFBDEFBFBD43EFBFBDEFBFBDEFBFBDDBBB033FEFBFBD48EFBFBD2E40EFBFBD09EFBFBD06",
                             PasswordSalt = "00000000-0000-0000-0000-000000000000",
                             UserId = 4,
@@ -95,7 +123,7 @@ namespace mvc.Migrations
                         });
                 });
 
-            modelBuilder.Entity("mvc.Domains.Menu", b =>
+            modelBuilder.Entity("mvc.Domain.Menu", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -103,6 +131,16 @@ namespace mvc.Migrations
                         .HasColumnName("id");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -118,40 +156,61 @@ namespace mvc.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("path");
 
+                    b.Property<string>("UpdatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("UpdatedDate")
+                        .HasColumnType("datetime2");
+
                     b.HasKey("Id");
 
                     b.HasIndex("ParentId");
 
-                    b.ToTable("menu");
+                    b.ToTable("Menu");
 
                     b.HasData(
                         new
                         {
                             Id = 1,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2024, 6, 14, 0, 11, 1, 54, DateTimeKind.Local).AddTicks(558),
+                            IsDeleted = false,
                             Name = "Quản lý bán hàng",
                             Path = "sale"
                         },
                         new
                         {
                             Id = 2,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2024, 6, 14, 0, 11, 1, 54, DateTimeKind.Local).AddTicks(559),
+                            IsDeleted = false,
                             Name = "Quản lý nội dung",
                             Path = "content"
                         },
                         new
                         {
                             Id = 3,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2024, 6, 14, 0, 11, 1, 54, DateTimeKind.Local).AddTicks(561),
+                            IsDeleted = false,
                             Name = "Quản lý nhân sự",
                             Path = "hr"
                         },
                         new
                         {
                             Id = 4,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2024, 6, 14, 0, 11, 1, 54, DateTimeKind.Local).AddTicks(562),
+                            IsDeleted = false,
                             Name = "Quản lý hệ thống",
                             Path = "system"
                         },
                         new
                         {
                             Id = 5,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2024, 6, 14, 0, 11, 1, 54, DateTimeKind.Local).AddTicks(565),
+                            IsDeleted = false,
                             Name = "Menu",
                             ParentId = 4,
                             Path = "menu"
@@ -159,6 +218,9 @@ namespace mvc.Migrations
                         new
                         {
                             Id = 6,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2024, 6, 14, 0, 11, 1, 54, DateTimeKind.Local).AddTicks(567),
+                            IsDeleted = false,
                             Name = "Quyền",
                             ParentId = 4,
                             Path = "role"
@@ -166,13 +228,16 @@ namespace mvc.Migrations
                         new
                         {
                             Id = 7,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2024, 6, 14, 0, 11, 1, 54, DateTimeKind.Local).AddTicks(568),
+                            IsDeleted = false,
                             Name = "Quyền",
                             ParentId = 4,
                             Path = "permission"
                         });
                 });
 
-            modelBuilder.Entity("mvc.Domains.Role", b =>
+            modelBuilder.Entity("mvc.Domain.Role", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -181,45 +246,84 @@ namespace mvc.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("name");
 
+                    b.Property<string>("UpdatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("UpdatedDate")
+                        .HasColumnType("datetime2");
+
                     b.HasKey("Id");
 
-                    b.ToTable("role");
+                    b.ToTable("Role");
 
                     b.HasData(
                         new
                         {
                             Id = 1,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2024, 6, 14, 0, 11, 1, 54, DateTimeKind.Local).AddTicks(504),
+                            IsDeleted = false,
                             Name = "ADMIN"
                         },
                         new
                         {
                             Id = 2,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2024, 6, 14, 0, 11, 1, 54, DateTimeKind.Local).AddTicks(506),
+                            IsDeleted = false,
                             Name = "CONTENT CREATOR"
                         },
                         new
                         {
                             Id = 3,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2024, 6, 14, 0, 11, 1, 54, DateTimeKind.Local).AddTicks(507),
+                            IsDeleted = false,
                             Name = "SALE"
                         },
                         new
                         {
                             Id = 4,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2024, 6, 14, 0, 11, 1, 54, DateTimeKind.Local).AddTicks(508),
+                            IsDeleted = false,
                             Name = "HR"
                         });
                 });
 
-            modelBuilder.Entity("mvc.Domains.RoleMenu", b =>
+            modelBuilder.Entity("mvc.Domain.RoleMenu", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("id");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<int>("MenuId")
                         .HasColumnType("int")
@@ -229,60 +333,87 @@ namespace mvc.Migrations
                         .HasColumnType("int")
                         .HasColumnName("roleId");
 
+                    b.Property<string>("UpdatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("UpdatedDate")
+                        .HasColumnType("datetime2");
+
                     b.HasKey("Id");
 
                     b.HasIndex("MenuId");
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("role_menu");
+                    b.ToTable("RoleMenu");
 
                     b.HasData(
                         new
                         {
                             Id = 1,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2024, 6, 14, 0, 11, 1, 54, DateTimeKind.Local).AddTicks(595),
+                            IsDeleted = false,
                             MenuId = 1,
                             RoleId = 1
                         },
                         new
                         {
                             Id = 2,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2024, 6, 14, 0, 11, 1, 54, DateTimeKind.Local).AddTicks(597),
+                            IsDeleted = false,
                             MenuId = 2,
                             RoleId = 1
                         },
                         new
                         {
                             Id = 3,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2024, 6, 14, 0, 11, 1, 54, DateTimeKind.Local).AddTicks(598),
+                            IsDeleted = false,
                             MenuId = 3,
                             RoleId = 1
                         },
                         new
                         {
                             Id = 4,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2024, 6, 14, 0, 11, 1, 54, DateTimeKind.Local).AddTicks(599),
+                            IsDeleted = false,
                             MenuId = 4,
                             RoleId = 1
                         },
                         new
                         {
                             Id = 5,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2024, 6, 14, 0, 11, 1, 54, DateTimeKind.Local).AddTicks(601),
+                            IsDeleted = false,
                             MenuId = 2,
                             RoleId = 2
                         },
                         new
                         {
                             Id = 6,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2024, 6, 14, 0, 11, 1, 54, DateTimeKind.Local).AddTicks(602),
+                            IsDeleted = false,
                             MenuId = 1,
                             RoleId = 3
                         },
                         new
                         {
                             Id = 7,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2024, 6, 14, 0, 11, 1, 54, DateTimeKind.Local).AddTicks(603),
+                            IsDeleted = false,
                             MenuId = 3,
                             RoleId = 4
                         });
                 });
 
-            modelBuilder.Entity("mvc.Domains.User", b =>
+            modelBuilder.Entity("mvc.Domain.User", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -295,53 +426,98 @@ namespace mvc.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("address");
 
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("FullName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("full_name");
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UpdatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("UpdatedDate")
+                        .HasColumnType("datetime2");
+
                     b.HasKey("Id");
 
-                    b.ToTable("user");
+                    b.ToTable("User");
 
                     b.HasData(
                         new
                         {
                             Id = 1,
                             Address = "Long Biên",
-                            FullName = "Admin"
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2024, 6, 14, 0, 11, 1, 53, DateTimeKind.Local).AddTicks(9753),
+                            FullName = "Admin",
+                            IsDeleted = false
                         },
                         new
                         {
                             Id = 2,
                             Address = "Hà Đông",
-                            FullName = "Nhân viên CC01"
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2024, 6, 14, 0, 11, 1, 53, DateTimeKind.Local).AddTicks(9766),
+                            FullName = "Nhân viên CC01",
+                            IsDeleted = false
                         },
                         new
                         {
                             Id = 3,
                             Address = "Hai Bà Trưng",
-                            FullName = "Nhân viên SALE02"
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2024, 6, 14, 0, 11, 1, 53, DateTimeKind.Local).AddTicks(9767),
+                            FullName = "Nhân viên SALE02",
+                            IsDeleted = false
                         },
                         new
                         {
                             Id = 4,
                             Address = "Thanh Xuân",
-                            FullName = "Nhân viên HR03"
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2024, 6, 14, 0, 11, 1, 53, DateTimeKind.Local).AddTicks(9768),
+                            FullName = "Nhân viên HR03",
+                            IsDeleted = false
                         });
                 });
 
-            modelBuilder.Entity("mvc.Domains.UserRole", b =>
+            modelBuilder.Entity("mvc.Domain.UserRole", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("id");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<int>("RoleId")
                         .HasColumnType("int")
                         .HasColumnName("roleId");
+
+                    b.Property<string>("UpdatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("UpdatedDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("UserId")
                         .HasColumnType("int")
@@ -353,64 +529,76 @@ namespace mvc.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("user_role");
+                    b.ToTable("UserRole");
 
                     b.HasData(
                         new
                         {
                             Id = 1,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2024, 6, 14, 0, 11, 1, 54, DateTimeKind.Local).AddTicks(532),
+                            IsDeleted = false,
                             RoleId = 1,
                             UserId = 1
                         },
                         new
                         {
                             Id = 2,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2024, 6, 14, 0, 11, 1, 54, DateTimeKind.Local).AddTicks(533),
+                            IsDeleted = false,
                             RoleId = 2,
                             UserId = 2
                         },
                         new
                         {
                             Id = 3,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2024, 6, 14, 0, 11, 1, 54, DateTimeKind.Local).AddTicks(534),
+                            IsDeleted = false,
                             RoleId = 3,
                             UserId = 3
                         },
                         new
                         {
                             Id = 4,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2024, 6, 14, 0, 11, 1, 54, DateTimeKind.Local).AddTicks(535),
+                            IsDeleted = false,
                             RoleId = 4,
                             UserId = 4
                         });
                 });
 
-            modelBuilder.Entity("mvc.Domains.Account", b =>
+            modelBuilder.Entity("mvc.Domain.Account", b =>
                 {
-                    b.HasOne("mvc.Domains.User", "User")
+                    b.HasOne("mvc.Domain.User", "User")
                         .WithOne("Account")
-                        .HasForeignKey("mvc.Domains.Account", "UserId")
+                        .HasForeignKey("mvc.Domain.Account", "UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("mvc.Domains.Menu", b =>
+            modelBuilder.Entity("mvc.Domain.Menu", b =>
                 {
-                    b.HasOne("mvc.Domains.Menu", "Parent")
+                    b.HasOne("mvc.Domain.Menu", "Parent")
                         .WithMany("Children")
                         .HasForeignKey("ParentId");
 
                     b.Navigation("Parent");
                 });
 
-            modelBuilder.Entity("mvc.Domains.RoleMenu", b =>
+            modelBuilder.Entity("mvc.Domain.RoleMenu", b =>
                 {
-                    b.HasOne("mvc.Domains.Menu", "Menu")
+                    b.HasOne("mvc.Domain.Menu", "Menu")
                         .WithMany("RoleMenus")
                         .HasForeignKey("MenuId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("mvc.Domains.Role", "Role")
+                    b.HasOne("mvc.Domain.Role", "Role")
                         .WithMany("RoleControllers")
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -421,15 +609,15 @@ namespace mvc.Migrations
                     b.Navigation("Role");
                 });
 
-            modelBuilder.Entity("mvc.Domains.UserRole", b =>
+            modelBuilder.Entity("mvc.Domain.UserRole", b =>
                 {
-                    b.HasOne("mvc.Domains.Role", "Role")
+                    b.HasOne("mvc.Domain.Role", "Role")
                         .WithMany("UserRoles")
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("mvc.Domains.User", "User")
+                    b.HasOne("mvc.Domain.User", "User")
                         .WithMany("UserRoles")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -440,21 +628,21 @@ namespace mvc.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("mvc.Domains.Menu", b =>
+            modelBuilder.Entity("mvc.Domain.Menu", b =>
                 {
                     b.Navigation("Children");
 
                     b.Navigation("RoleMenus");
                 });
 
-            modelBuilder.Entity("mvc.Domains.Role", b =>
+            modelBuilder.Entity("mvc.Domain.Role", b =>
                 {
                     b.Navigation("RoleControllers");
 
                     b.Navigation("UserRoles");
                 });
 
-            modelBuilder.Entity("mvc.Domains.User", b =>
+            modelBuilder.Entity("mvc.Domain.User", b =>
                 {
                     b.Navigation("Account");
 

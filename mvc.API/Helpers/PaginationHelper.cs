@@ -1,6 +1,6 @@
-﻿using mvc.Models;
+﻿using mvc.API.Models;
 
-namespace mvc.Helpers
+namespace mvc.API.Helpers
 {
     public static class PaginationHelper
     {

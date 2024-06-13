@@ -1,10 +1,11 @@
-﻿using mvc.Domains;
+﻿using mvc.Domain;
+using mvc.Infrastructure;
 
-namespace mvc.Repository
+namespace mvc.API.Repository
 {
     public class UnitOfWork : IDisposable
     {
-        private AppDbContext _context = new AppDbContext();
+        private AppDbContext _context;
         private GenericRepository<Menu> menuRepository;
 
         public GenericRepository<Menu> MenuRepository
@@ -28,14 +29,14 @@ namespace mvc.Repository
 
         protected virtual void Dispose(bool disposing)
         {
-            if (!this.disposed)
+            if (!disposed)
             {
                 if (disposing)
                 {
                     _context.Dispose();
                 }
             }
-            this.disposed = true;
+            disposed = true;
         }
 
         public void Dispose()
