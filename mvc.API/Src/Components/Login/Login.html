@@ -1,0 +1,122 @@
+﻿<div class="container">
+    <div ng-if="vm.IsSignIn">
+        <form name="vm.formSignIn"
+              ng-submit="vm.signIn(vm.SignIn)"
+              novalidate>
+            <div class="form-group">
+                <label class="form-label"
+                       for="exampleInputUsername">Username</label>
+                <input type="text"
+                       name="username"
+                       class="form-control"
+                       id="exampleInputUsername"
+                       placeholder="Enter username"
+                       ng-model="vm.SignIn.Username"
+                       required>
+                <div class="form-text text-danger"
+                     ng-show="vm.formSignIn.username.$touched && vm.formSignIn.username.$invalid">
+                    <span ng-show="vm.formSignIn.username.$error.required">
+                        Username Required
+                    </span>
+                </div>
+
+            </div>
+            <div class="form-group">
+                <label class="form-label"
+                       for="exampleInputPassword1">Password</label>
+                <input type="password"
+                       name="pwd"
+                       class="form-control"
+                       id="exampleInputPassword1"
+                       placeholder="Enter password"
+                       ng-model="vm.SignIn.Password"
+                       ng-minlength="6"
+                       required>
+                <div class="form-text text-danger"
+                     ng-show="vm.formSignIn.pwd.$touched && vm.formSignIn.pwd.$invalid">
+                    <span ng-show="vm.formSignIn.pwd.$error.required">
+                        Password Required
+                    </span>
+                    <span ng-show="vm.formSignIn.pwd.$error.minlength">
+                        Password is too short
+                    </span>
+                </div>
+            </div>
+            <button type="submit"
+                    class="btn btn-primary"
+                    ng-disabled="vm.formSignIn.$invalid || vm.formSignIn.$pristine">
+                Sign in
+            </button>
+        </form>
+        <span>Don't have account? </span> <a href="javascript:void(0)" ng-click="vm.ChangeStateSignIn(false)">Sign up here</a>
+    </div>
+    <div ng-if="!vm.IsSignIn">
+        <form name="vm.formSignUp"
+              ng-submit="vm.signUp(vm.SignUp)"
+              novalidate>
+            <div class="form-group">
+                <label class="form-label"
+                       for="fullname">Full name</label>
+                <input type="text"
+                       name="fullname"
+                       class="form-control"
+                       id="fullname"
+                       placeholder="Enter fullname"
+                       ng-model="vm.SignUp.Fullname"
+                       required>
+                <div class="form-text text-danger"
+                     ng-show="vm.formSignUp.fullname.$touched && vm.formSignUp.fullname.$invalid">
+                    <span ng-show="vm.formSignUp.fullname.$error.required">
+                        Fullname Required
+                    </span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="form-label"
+                       for="username">Username</label>
+                <input type="text"
+                       name="username"
+                       class="form-control"
+                       id="username"
+                       placeholder="Enter username"
+                       ng-model="vm.SignUp.Username"
+                       required>
+                <div class="form-text text-danger"
+                     ng-show="vm.formSignUp.username.$touched && vm.formSignUp.username.$invalid">
+                    <span ng-show="vm.formSignUp.username.$error.required">
+                        Username Required
+                    </span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="form-label"
+                       for="exampleInputPassword1">Password</label>
+                <input type="password"
+                       name="pwd"
+                       class="form-control"
+                       id="exampleInputPassword1"
+                       placeholder="Enter password"
+                       ng-model="vm.SignUp.Password"
+                       ng-minlength="6"
+                       required>
+                <div class="form-text text-danger"
+                     ng-show="vm.formSignUp.pwd.$touched && vm.formSignUp.pwd.$invalid">
+                    <span ng-show="vm.formSignUp.pwd.$error.required">
+                        Password Required
+                    </span>
+                    <span ng-show="vm.formSignUp.pwd.$error.minlength">
+                        Password is too short
+                    </span>
+                </div>
+            </div>
+            <button type="submit"
+                    class="btn btn-primary"
+                    ng-disabled="vm.formSignUp.$invalid || vm.formSignUp.$pristine">
+                Sign up
+            </button>
+        </form>
+        <span>Already have account? </span> <a href="javascript:void(0)" ng-click="vm.ChangeStateSignIn(true)">Sign in here</a>
+    </div>
+</div>
+
+

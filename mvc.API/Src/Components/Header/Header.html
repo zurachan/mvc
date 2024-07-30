@@ -1,0 +1,66 @@
+﻿<div class="row">
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button"
+                        class="navbar-toggle collapsed"
+                        data-toggle="collapse"
+                        data-target="#bs-example-navbar-collapse-1"
+                        aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand text-uppercase" ui-sref="home">home</a>
+            </div>
+
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li ng-repeat-start="item in vm.menu"
+                        ng-class="vm.Current == item.path ? 'active':''"
+                        ng-if="item.children.length < 1">
+                        <a ng-class="vm.Current == item.path ? 'active':''"
+                           ui-sref="{{item.path}}">
+                            {{item.name}}
+                        </a>
+                    </li>
+                    <li ng-repeat-end ng-if="item.children.length > 0" class="dropdown">
+                        <a class="dropdown-toggle"
+                           data-toggle="dropdown"
+                           role="button"
+                           aria-haspopup="true"
+                           aria-expanded="false">
+                            {{item.name}} <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li ng-repeat="child in item.children" ng-class="vm.Current == child.path ? 'active':''">
+                                <a ui-sref="{{child.path}}">
+                                    {{child.name}}
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a class="dropdown-toggle"
+                           data-toggle="dropdown"
+                           role="button"
+                           aria-haspopup="true"
+                           aria-expanded="false">
+                            {{vm.user.fullName}}
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Profile</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="javascript:void(0)" ng-click="vm.signOut()">Sign out</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>

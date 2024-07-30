@@ -1,0 +1,10 @@
+﻿<div class="container-fluid" ng-if="vm.IsAuthen">
+    <app-header sign-out="vm.onSignOut" user="vm.CurrentUser" menu="vm.Menu"></app-header>
+    <ui-view></ui-view>
+    <!--<app-footer></app-footer>-->
+</div>
+
+<div ng-if="!vm.IsAuthen">
+    <app-login sign-in="vm.onSignIn" sign-up="vm.onSignUp"></app-login>
+</div>
+
